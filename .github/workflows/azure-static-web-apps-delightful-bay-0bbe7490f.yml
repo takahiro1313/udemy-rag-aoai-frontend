@@ -19,6 +19,17 @@ jobs:
         with:
           submodules: true
           lfs: false
+
+      # Azure OpenAI APIリクエストログの追加
+      - name: Debug Azure OpenAI API Request
+        run: |
+          echo "Debugging Azure OpenAI API Request..."
+          echo "AZURE_OPENAI_API_ENDPOINT: ${{ secrets.AZURE_OPENAI_API_ENDPOINT }}"
+          curl -X POST ${{ secrets.AZURE_OPENAI_API_ENDPOINT }}/openai/deployments/${{ secrets.AZURE_OPENAI_API_DEPLOYMENT_ID }}/chat/completions \
+            -H "Authorization: Bearer ${{ secrets.AZURE_OPENAI_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"messages":[{"role":"user","content":"Hello from GitHub Actions"}]}' || true
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
