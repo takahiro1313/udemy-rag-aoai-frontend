@@ -5,7 +5,7 @@ import {Provider} from "react-redux"
 import {store} from "../../store/store"
 import SideMenu from '../../components/SideMenu/SideMenu';
 
-const MainLayout = ({children}: {childlen: React.ReactNode}) => {
+const MainLayout = ({children}: {children: React.ReactNode}) => {
     return(
         <div className='flex h-screen'>
         <Provider store={store}>
